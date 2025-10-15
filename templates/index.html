@@ -1,21 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CloudGallery</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #6A1B9A;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            background-color: #8E24AA;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffdd57;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: #8E24AA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #6A1B9A;
+        }
+
+        h2 {
+            text-align: center;
+            color: #6A1B9A;
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-item p {
+            font-size: 14px;
+            color: #555;
+            word-wrap: break-word;
+        }
+
+        footer {
+            background-color: #6A1B9A;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        /* Responsive tweaks */
+        @media(max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>CloudGallery</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <button type="submit">Upload</button>
-    </form>
-    <hr>
-    <h2>Uploaded Images</h2>
-    {% for img in images %}
-        <div>
-            <p>{{ img.filename }}</p>
-            <img src="{{ img.url }}" width="200">
-        </div>
-    {% endfor %}
+    <header>
+        <h1>CloudGallery</h1>
+        <p>Upload and showcase your images in the cloud</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#upload">Upload</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <main>
+        <section id="upload">
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <section id="gallery">
+            <h2>Uploaded Images</h2>
+            <div class="gallery">
+                {% for img in images %}
+                <div class="gallery-item">
+                    <img src="{{ img.url }}" alt="{{ img.filename }}">
+                    <p>{{ img.filename }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="about" style="margin-top:40px; text-align:center;">
+            <h2>About CloudGallery</h2>
+            <p>CloudGallery is a simple web application that allows users to upload images to the cloud and display them in a modern, responsive gallery. Built with Python Flask, AWS S3, and DynamoDB, it demonstrates cloud storage, dynamic content rendering, and web design principles.</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 CloudGallery. All rights reserved.
+    </footer>
 </body>
 </html>

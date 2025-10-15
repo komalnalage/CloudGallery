@@ -24,7 +24,8 @@ def index():
                 "id": str(uuid.uuid4()),
                 "filename": filename,
                 "upload_time": str(datetime.now()),
-                "url": f"https://{S3_BUCKET}.s3.amazonaws.com/{filename}"
+                "url": f"https://{S3_BUCKET}.s3.{AWS_REGION}.amazonaws.com/{filename}"
+
             })
         return redirect("/")
 
