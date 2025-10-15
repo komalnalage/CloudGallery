@@ -28,6 +28,7 @@ def index():
             })
         return redirect("/")
 
+    # GET request - fetch all images from DynamoDB
     response = table.scan()
     images = response.get("Items", [])
     return render_template("index.html", images=images)
