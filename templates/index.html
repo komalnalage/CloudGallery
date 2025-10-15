@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CloudGallery</title>
+</head>
+<body>
+    <h1>CloudGallery</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <hr>
+    <h2>Uploaded Images</h2>
+    {% for img in images %}
+        <div>
+            <p>{{ img.filename }}</p>
+            <img src="{{ img.url }}" width="200">
+        </div>
+    {% endfor %}
+</body>
+</html>
